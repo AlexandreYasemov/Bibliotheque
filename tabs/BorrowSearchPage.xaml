@@ -71,18 +71,18 @@
                                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                                     <StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock  Text="Du " FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Foreground="Gray"/>
+                                            <TextBlock  Text="From " FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Foreground="Gray"/>
                                             <TextBlock  Text="{Binding Path=StartDate, StringFormat=d, ConverterCulture=fr-CH}" TextWrapping="NoWrap" FontSize="14" VerticalAlignment="Center" FontWeight="Bold"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock  Text="Au " FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Foreground="Gray"/>
+                                            <TextBlock  Text="To " FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Foreground="Gray"/>
                                             <TextBlock  Text="{Binding Path=DueDate, StringFormat=d, ConverterCulture=fr-CH}" TextWrapping="NoWrap" FontSize="14" VerticalAlignment="Center" FontWeight="Bold"/>
                                         </StackPanel>
                                     </StackPanel>
                                     <StackPanel>
                                         <TextBlock Name="tb_late" Text="Retard" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="Red" Initialized="Late_Initialized"/>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock  Text="Rendu " FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Foreground="Gray" Visibility="Collapsed" Initialized="Return_Initialized" Margin="8,0,0,0"/>
+                                            <TextBlock  Text="Returned " FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Foreground="Gray" Visibility="Collapsed" Initialized="Return_Initialized" Margin="8,0,0,0"/>
                                             <TextBlock  Text="{Binding Path=EndDate, StringFormat=d, ConverterCulture=fr-CH}" TextWrapping="NoWrap" FontSize="14" VerticalAlignment="Center" FontWeight="Bold"/>
                                         </StackPanel>
                                     </StackPanel>
