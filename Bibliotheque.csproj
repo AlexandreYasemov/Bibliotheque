@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="database.db-wal" />
+    <None Remove="default_book.png" />
+    <None Remove="icons\add_book.png" />
+    <None Remove="icons\author.png" />
+    <None Remove="icons\books.png" />
+    <None Remove="icons\filter.png" />
+    <None Remove="icons\location.png" />
+    <None Remove="icons\password.png" />
+    <None Remove="icons\publisher.png" />
+    <None Remove="icons\refresh.png" />
+    <None Remove="icons\search.png" />
+    <None Remove="icons\settings.png" />
+    <None Remove="icons\superuser.png" />
+    <None Remove="icons\type.png" />
+    <None Remove="icons\user.png" />
+    <None Remove="images\default_book.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Linq" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons\add_book.png" />
+    <Resource Include="icons\author.png" />
+    <Resource Include="icons\books.png" />
+    <Resource Include="icons\filter.png" />
+    <Resource Include="icons\password.png" />
+    <Resource Include="icons\publisher.png" />
+    <Resource Include="icons\refresh.png" />
+    <Resource Include="icons\search.png" />
+    <Resource Include="icons\superuser.png" />
+    <Resource Include="icons\type.png" />
+    <Resource Include="icons\user.png" />
+    <Resource Include="images\default_book.png" />
+    <Resource Include="icons\location.png" />
+    <Resource Include="icons\settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="database.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

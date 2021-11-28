@@ -1,0 +1,115 @@
+﻿<Page x:Class="Bibliotheque.tabs.BorrowSearchPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Bibliotheque.tabs"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BorrowSearchPage" Focusable="False">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="64" Name="pagingArea"/>
+        </Grid.RowDefinitions>
+        <Grid Height="64" VerticalAlignment="Top">
+            <DockPanel HorizontalAlignment="Stretch">
+                <DatePicker Name="dp_end" DockPanel.Dock="Right" Width="112" HorizontalAlignment="Right" VerticalAlignment="Center" Height="40" Style="{StaticResource DatePicker1}" Margin="8" SelectedDateChanged="Value_Changed" VerticalContentAlignment="Center"/>
+                <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="16" FontWeight="Bold">to</TextBlock>
+                <DatePicker Name="dp_start" DockPanel.Dock="Right" Width="112" HorizontalAlignment="Right" VerticalAlignment="Center" Height="40" Style="{StaticResource DatePicker1}" Margin="8" SelectedDateChanged="Value_Changed" VerticalContentAlignment="Center"/>
+                <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="16" FontWeight="Bold">From</TextBlock>
+                <Button Name="Filter" HorizontalAlignment="Right" Width="48" Height="48" DockPanel.Dock="Right" Margin="0,8,10,8" Style="{StaticResource Button1}" Click="Filter_Click">
+                    <Image Source="/icons/filter.png"/>
+                </Button>
+                <Border Name="border" Grid.Row="0" Background="White" BorderBrush="LightGray" BorderThickness="2" Height="40" DockPanel.Dock="Left" Margin="8,0,8,0" CornerRadius="4">
+                    <Grid HorizontalAlignment="Stretch" Width="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Name="sp_TermsArea" Orientation="Horizontal" HorizontalAlignment="Stretch" Width="Auto" Grid.Row="0">
+                        </StackPanel>
+                        <TextBox Grid.Column="1" Name="SearchBar" KeyDown="KeyDown_Search" PreviewKeyDown="PreviewKeyDown_Search"  FontSize="16" TextWrapping="NoWrap" Height="40" Width="Auto" HorizontalAlignment="Stretch" DockPanel.Dock="Left" VerticalContentAlignment="Center" Style="{StaticResource TextboxSearch}" />
+                    </Grid>
+                </Border>
+            </DockPanel>
+        </Grid>
+        <DockPanel Width="auto" HorizontalAlignment="Stretch" Grid.Row="1">
+            <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock DockPanel.Dock="Left" Grid.Column="0" Text="User :" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                <TextBlock DockPanel.Dock="Left" Grid.Column="1" Text="Book :" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Margin="8,0,0,0"/>
+            </Grid>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            </StackPanel>
+            <CheckBox Click="Checked_History" Name="cb_history" DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right" Height="18" Width="100" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center">History</CheckBox>
+            <CheckBox Click="Checked_Late" Name="cb_late" DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right" Height="18" Width="124" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center">Filter late</CheckBox>
+        </DockPanel>
+        <ScrollViewer Grid.Row="2" VerticalContentAlignment="Top" Width="auto">
+            <StackPanel>
+                <ItemsControl Name="ListControl" ItemsSource="{Binding EntryView}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="Borrow">
+                            <DockPanel Width="auto" HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Height="48" HorizontalAlignment="Left">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding Path=Account.Name}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding Path=Book.Title}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                    </Grid>
+
+                                </StackPanel>
+                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock  Text="Du " FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Foreground="Gray"/>
+                                            <TextBlock  Text="{Binding Path=StartDate, StringFormat=d, ConverterCulture=fr-CH}" TextWrapping="NoWrap" FontSize="14" VerticalAlignment="Center" FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock  Text="Au " FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Foreground="Gray"/>
+                                            <TextBlock  Text="{Binding Path=DueDate, StringFormat=d, ConverterCulture=fr-CH}" TextWrapping="NoWrap" FontSize="14" VerticalAlignment="Center" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock Name="tb_late" Text="Retard" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="Red" Initialized="Late_Initialized"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock  Text="Rendu " FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Foreground="Gray" Visibility="Collapsed" Initialized="Return_Initialized" Margin="8,0,0,0"/>
+                                            <TextBlock  Text="{Binding Path=EndDate, StringFormat=d, ConverterCulture=fr-CH}" TextWrapping="NoWrap" FontSize="14" VerticalAlignment="Center" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <Button Click="ModifyEntry_Click" Style="{StaticResource Button1}" FontWeight="Bold" FontSize="14" Height="24" Margin="8,0,8,0">Modify</Button>
+                                    <Button Click="DeleteEntry_Click" Style="{StaticResource ButtonDelete}" FontWeight="Bold" FontSize="14" Height="24" Margin="8,0,0,0">Delete</Button>
+                                </StackPanel>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Row="3" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button Click="Start_Click" Height="40" MinWidth="32" Style="{StaticResource Button1}" Margin="16,0,0,0" HorizontalAlignment="Left">
+                <TextBlock Text="1" FontWeight="Bold" FontSize="20"/>
+            </Button>
+            <Button Click="Previous_Click" Height="40" Width="32" Style="{StaticResource Button1}" Margin="8,0,0,0" HorizontalAlignment="Left">
+                <TextBlock Text="&lt;" FontWeight="Bold" FontSize="30" VerticalAlignment="Center" Height="46"/>
+            </Button>
+            <TextBox PreviewTextInput="CurrentPage_PreviewTextInput" KeyDown="CurrentPage_KeyEnter" Name="tb_CurrentPage" Text="1" FontSize="18" Grid.Row="0" TextWrapping="NoWrap" Margin="8,0,0,0" MinWidth="48" MaxWidth="512" Height="40" Style="{StaticResource Textbox1}" HorizontalContentAlignment="Center">
+            </TextBox>
+            <Button Click="Next_Click" Height="40" Width="32" Style="{StaticResource Button1}" Margin="8,0,0,0" HorizontalAlignment="Left">
+                <TextBlock Text=">" FontWeight="Bold" FontSize="30" VerticalAlignment="Center" Height="46"/>
+            </Button>
+            <Button Click="End_Click" Height="40" MinWidth="32" Style="{StaticResource Button1}" Margin="8,0,0,0" HorizontalAlignment="Left">
+                <TextBlock Name="tb_MaxPages" Text="1" FontWeight="Bold" FontSize="20"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

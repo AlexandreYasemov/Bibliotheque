@@ -1,0 +1,84 @@
+﻿<Page x:Class="Bibliotheque.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Bibliotheque"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="AdminPage" Focusable="False">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock VerticalAlignment="Center" Margin="2,0,0,0" FontSize="34" FontWeight="Bold" Text="Admin"/>
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8,8,8,8">
+                <Image Source="/icons/add_book.png" MaxWidth="64" VerticalAlignment="Top">
+                </Image>
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Add book" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" Click="Add_Book">
+                    </Button>
+                        <Button Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Manage reservations" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" Click="Modify_Borrows">
+                        </Button>
+                    </StackPanel>
+                    <Button Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Modify book" FontWeight="Bold" FontSize="18" Click="Modify_Book" HorizontalAlignment="Left" >
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8,8,8,8">
+                <Image Source="/icons/location.png" MaxWidth="64" VerticalAlignment="Top">
+                </Image>
+                <StackPanel VerticalAlignment="Center">
+                    <Button Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Add location" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" Click="Add_Location">
+                    </Button>
+                    <Button Click="Modify_Location" Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Modify location" FontWeight="Bold" FontSize="18">
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8,8,8,8">
+                <Image Source="/icons/user.png" MaxWidth="64" VerticalAlignment="Top">
+                </Image>
+                <StackPanel VerticalAlignment="Center">
+                    <Button Click="Add_Account" Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Add user" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left">
+                    </Button>
+                    <Button Click="Modify_User" Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Modify user" FontWeight="Bold" FontSize="18">
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8,8,8,8">
+                <Image Source="/icons/author.png" MaxWidth="64" VerticalAlignment="Top">
+                </Image>
+                <StackPanel VerticalAlignment="Center">
+                    <Button Click="Add_Author" Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Add author" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left">
+                    </Button>
+                    <Button Click="Modify_Author" Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Modify author" FontWeight="Bold" FontSize="18">
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8,8,8,8">
+                <Image Source="/icons/publisher.png" MaxWidth="64" VerticalAlignment="Top">
+                </Image>
+                <StackPanel VerticalAlignment="Center">
+                    <Button Click="Add_Publisher" Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Add publisher" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left">
+                    </Button>
+                    <Button Click="Modify_Publisher" Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Modify publisher" FontWeight="Bold" FontSize="18">
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8,8,8,8">
+                <Image Source="/icons/type.png" MaxWidth="64" VerticalAlignment="Top">
+                </Image>
+                <StackPanel VerticalAlignment="Center">
+                    <Button Click="Add_Type" Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Add genre" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left">
+                    </Button>
+                    <Button Click="Modify_Type" Margin="4,2,2,2" Style="{StaticResource Button1}" Content="Modifier genre" FontWeight="Bold" FontSize="18">
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,172 @@
+﻿<Page x:Class="Bibliotheque.BookPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Bibliotheque"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BookPage" Focusable="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="64" Name="pagingArea"/>
+        </Grid.RowDefinitions>
+        <Grid Height="64" VerticalAlignment="Top">
+            <DockPanel HorizontalAlignment="Stretch">
+                <CheckBox IsEnabled="False" Click="Checked_Archived" Visibility="Collapsed" Name="cb_archived" DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right" Height="18" Width="80" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center">Archived</CheckBox>
+                <Button Name="AddBook" HorizontalAlignment="Right" Width="48" Height="48" Visibility="Collapsed" IsEnabled="False" DockPanel.Dock="Right" Margin="0,8,10,8" Style="{StaticResource Button1}" Click="Add_Book">
+                    <Image Source="/icons/add_book.png"/>
+                </Button>
+                <Button Name="Refresh" HorizontalAlignment="Right" Width="48" Height="48" DockPanel.Dock="Right" Margin="0,8,10,8" Style="{StaticResource Button1}" Click="Refresh_Click">
+                    <Image Source="/icons/refresh.png"/>
+                </Button>
+                <Button Name="Filter" HorizontalAlignment="Right" Width="48" Height="48" DockPanel.Dock="Right" Margin="0,8,10,8" Style="{StaticResource Button1}" Click="Filter_Click">
+                    <Image Source="/icons/filter.png"/>
+                </Button>
+                <Border Name="border" Grid.Row="0" Background="White" BorderBrush="LightGray" BorderThickness="2" Height="40" DockPanel.Dock="Left" Margin="8,0,8,0" CornerRadius="4">
+                    <Grid HorizontalAlignment="Stretch" Width="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Name="sp_TermsArea" Orientation="Horizontal" HorizontalAlignment="Stretch" Width="Auto" Grid.Row="0">
+                        </StackPanel>
+                        <TextBox Grid.Column="1" Name="SearchBar" KeyDown="KeyDown_Search" PreviewKeyDown="PreviewKeyDown_Search"  FontSize="16" TextWrapping="NoWrap" Height="40" Width="Auto" HorizontalAlignment="Stretch" DockPanel.Dock="Left" VerticalContentAlignment="Center" Style="{StaticResource TextboxSearch}" />
+                    </Grid>
+                </Border>
+            </DockPanel>
+        </Grid>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+                <ItemsControl Name="BookControl" ItemsSource="{Binding BookView}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="SearchViewBook">
+                            <Expander Grid.Column="1" HorizontalAlignment="Stretch" Height="auto" Margin="10,0,0,0" VerticalAlignment="Top" Expanded="Expander_Expanded">
+                                <Expander.Header>
+                                    <DockPanel Width="{Binding
+                                           RelativeSource={RelativeSource
+                                           Mode=FindAncestor,
+                                           AncestorType={x:Type Expander}},
+                                           Path=ActualWidth}">
+                                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Path=Book.Title}"/>
+                                            <TextBlock Text=" - "/>
+                                            <TextBlock Text="{Binding Path=Book.Author.Name}"/>
+                                            <TextBlock Text=" - "/>
+                                            <TextBlock Text="{Binding Path=Book.Tags}" FontWeight="Bold" FontSize="11" Foreground="DarkGray"/>
+                                        </StackPanel>
+                                        <TextBlock Initialized="Textblock_RowInitialized" TextAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,28,0" FontWeight="Bold" FontSize="16"></TextBlock>
+                                    </DockPanel>
+                                </Expander.Header>
+                                <Grid MinHeight="124" Height="Auto">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="2*"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <WrapPanel Orientation="Horizontal" Grid.ColumnSpan="3">
+                                        <StackPanel  Margin="0,0,16,0">
+                                            <TextBlock FontWeight="Bold" FontSize="13">Title:</TextBlock>
+                                            <TextBlock Text="{Binding Path=Book.Title}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,16,0">
+                                            <TextBlock FontWeight="Bold" FontSize="13">Author:</TextBlock>
+                                            <TextBlock>
+                                                <Hyperlink Click="Author_Click" TextDecorations="Underline">
+                                                    <TextBlock Text="{Binding Path=Book.Author.Name}"/>
+                                                </Hyperlink>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,16,0">
+                                            <TextBlock FontWeight="Bold" FontSize="13">Publisher:</TextBlock>
+                                            <TextBlock>
+                                                <Hyperlink Click="Publisher_Click" TextDecorations="Underline">
+                                                    <TextBlock Text="{Binding Path=Book.Publisher.Name}"/>
+                                                </Hyperlink>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,16,0">
+                                            <TextBlock FontWeight="Bold" FontSize="13">Published:</TextBlock>
+                                            <TextBlock Text="{Binding Path=Book.Date, StringFormat=d, ConverterCulture=fr-CH}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,16,0">
+                                            <TextBlock FontWeight="Bold" FontSize="13">Genre:</TextBlock>
+                                            <TextBlock Text="{Binding Path=Book.Type.Name}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,16,0">
+                                            <TextBlock FontWeight="Bold" FontSize="13">ISBN:</TextBlock>
+                                            <TextBlock Text="{Binding Path=Book.Isbn}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,16,0">
+                                            <TextBlock FontWeight="Bold" FontSize="13">Language:</TextBlock>
+                                            <TextBlock Text="{Binding Path=Book.Language}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,16,0">
+                                            <TextBlock FontWeight="Bold" FontSize="13">Stored at</TextBlock>
+                                            <TextBlock Text="{Binding Path=Book.Location.RoomName}"></TextBlock>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Book.Location.StreetName}"></TextBlock>
+                                                <TextBlock Text="{Binding Path=Book.Location.City}" Margin="8,0,0,0"></TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,16,0">
+                                            <TextBlock FontWeight="Bold" FontSize="13">Status:</TextBlock>
+                                            <TextBlock Text="{Binding Path=Book.Status}" Initialized="BookStatus_Initialized"></TextBlock>
+                                        </StackPanel>
+                                    </WrapPanel>
+                                    <Image  Grid.Row="1" Source="/images/default_book.png" Margin="0,8,0,0" ></Image>
+
+                                    <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,16,0,0">
+                                        <TextBlock FontWeight="Bold" FontSize="13">Description:</TextBlock>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Path=Book.Description}">
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="2">
+                                        <Button Name="RestoreBook" Visibility="Collapsed" IsEnabled="False" Margin="4,4,4,4" Style="{StaticResource Button1}" Content="Restaure" FontWeight="Bold" HorizontalAlignment="Right"  Width="100" Click="RestoreBook_Click" Initialized="RestoreBook_Initialized">
+                                        </Button>
+                                        <Button Name="ArchiveBook" Visibility="Collapsed" IsEnabled="False" Margin="4,4,4,4" Style="{StaticResource ButtonDelete}" Content="Archive" FontWeight="Bold" HorizontalAlignment="Right"  Width="100" Click="ArchiveBook_Click" Initialized="ArchiveBook_Initialized">
+                                        </Button>
+                                        <Button Margin="4,4,4,4" Style="{StaticResource Button1}" Content="Manage" FontWeight="Bold" HorizontalAlignment="Right" Width="100" Click="ManageBorrows_Click">
+                                        </Button>
+                                        <Button Name="ModifyBook" Visibility="Collapsed" IsEnabled="False" Margin="4,4,4,4" Style="{StaticResource Button1}" Content="Modify" FontWeight="Bold" HorizontalAlignment="Right"  Width="100" Click="ModifyBook_Click" Initialized="ModifyBook_Initialized">
+                                        </Button>
+                                        <Button Margin="4,4,4,4" Style="{StaticResource Button1}" Content="Reserve" FontWeight="Bold" HorizontalAlignment="Right" Width="100" Click="BorrowBook_Click">
+                                        </Button>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2">
+                                        <TextBlock Text="Tags: " VerticalAlignment="Center" FontWeight="Bold" FontSize="12" Foreground="DarkGray"></TextBlock>
+                                        <TextBlock Text="{Binding Path=Book.Tags}" Grid.ColumnSpan="2" VerticalAlignment="Center" FontWeight="Bold" FontSize="12" Foreground="DarkGray"></TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </Expander>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button Click="Start_Click" Height="40" MinWidth="32" Style="{StaticResource Button1}" Margin="16,0,0,0" HorizontalAlignment="Left">
+                <TextBlock Text="1" FontWeight="Bold" FontSize="20"/>
+            </Button>
+            <Button Click="Previous_Click" Height="40" Width="32" Style="{StaticResource Button1}" Margin="8,0,0,0" HorizontalAlignment="Left">
+                <TextBlock Text="&lt;" FontWeight="Bold" FontSize="30" VerticalAlignment="Center" Height="46"/>
+            </Button>
+            <TextBox PreviewTextInput="CurrentPage_PreviewTextInput" KeyDown="CurrentPage_KeyEnter" Name="tb_CurrentPage" Text="1" FontSize="18" Grid.Row="0" TextWrapping="NoWrap" Margin="8,0,0,0" MinWidth="48" MaxWidth="512" Height="40" Style="{StaticResource Textbox1}" HorizontalContentAlignment="Center">
+            </TextBox>
+            <Button Click="Next_Click" Height="40" Width="32" Style="{StaticResource Button1}" Margin="8,0,0,0" HorizontalAlignment="Left">
+                <TextBlock Text=">" FontWeight="Bold" FontSize="30" VerticalAlignment="Center" Height="46"/>
+            </Button>
+            <Button Click="End_Click" Height="40" MinWidth="32" Style="{StaticResource Button1}" Margin="8,0,0,0" HorizontalAlignment="Left">
+                <TextBlock Name="tb_MaxPages" Text="1" FontWeight="Bold" FontSize="20"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

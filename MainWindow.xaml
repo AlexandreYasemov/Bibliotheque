@@ -1,0 +1,80 @@
+﻿<Window x:Class="Bibliotheque.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bibliotheque"
+        mc:Ignorable="d"
+        Title="Gestion Bibliothèque" Height="700" Width="950" MinHeight="700" MinWidth="950">
+    <Grid VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="184"/>
+            <ColumnDefinition Width="12"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Name="windowFreeze" Panel.ZIndex="2" Grid.RowSpan="4" Grid.ColumnSpan="4" Fill="#CC000000" Visibility="Hidden"/>
+        <Frame Name="formsFrame" NavigationUIVisibility="Hidden" Panel.ZIndex="3" Grid.RowSpan="4" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Focusable="False"></Frame>
+        <Border Grid.ColumnSpan="2" Margin="0,0,0,-4" CornerRadius="0,0,20,0" Background="#FF323232" Panel.ZIndex="1">
+            <StackPanel Name="border_login" Visibility="Hidden" VerticalAlignment="Center">
+                <TextBlock FontSize="13" Background="Transparent" Text="Logged as:" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                <TextBlock Name="tb_account_name" FontSize="15" Background="Transparent" Text="Account" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Button Width="80" Height="20" Style="{StaticResource ButtonNo}" VerticalContentAlignment="Center" Margin="0,2,0,0" Click="Disconnect_Click">
+                    <TextBlock Text="Log off" FontSize="11" FontWeight="Bold"></TextBlock>
+                </Button>
+            </StackPanel>
+        </Border>
+        <TextBox Name="messageBox" Padding="16" Text="" TextWrapping="Wrap" Grid.Row="1" Grid.ColumnSpan="3" Height="0" Margin="-2" Background="Green" Panel.ZIndex="1" VerticalAlignment="Bottom" Style="{StaticResource Textbox2}" FontWeight="Bold" FontSize="20" Foreground="White"/>
+
+        <Frame Name="MainFrame" Grid.Column="2" Grid.RowSpan="2" NavigationUIVisibility="Hidden" Focusable="False">
+        </Frame>
+        <Grid Background="LightSkyBlue" Grid.Column="1" Grid.ColumnSpan="2" Panel.ZIndex="-1" Margin="0,0,0,16"></Grid>
+        <Grid Grid.Row="1" Margin="0,0,4,0">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0.74"/>
+                    <GradientStop Color="LightSkyBlue" Offset="0.613"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <ListBox x:Name="LeftTabMenu" Height="auto" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" ItemContainerStyle="{StaticResource ListBoxItem1}" Margin="-2,0,-2,0" SelectionChanged="LeftTabMenu_SelectionChanged">
+                <ListBoxItem Height="50" x:Name="books">
+                    <StackPanel Orientation="Horizontal" Background="#00000000">
+                        <Image Source="icons/books.png" Width="48"  Height="48" HorizontalAlignment="Left" Margin="0,0,0,0"></Image>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="Black" FontSize="25" FontWeight="Bold">Books</TextBlock>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Height="50" x:Name="borrows">
+                    <StackPanel Orientation="Horizontal" Background="#00000000">
+                        <Image Source="images/default_book.png" Width="48"  Height="48" HorizontalAlignment="Left" Margin="0,0,0,0"></Image>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="Black" FontSize="25" FontWeight="Bold">Reserved</TextBlock>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Height="50" x:Name="settings">
+                    <StackPanel Orientation="Horizontal" Background="#00000000">
+                        <Image Source="icons/settings.png" Width="48"  Height="48" HorizontalAlignment="Left" Margin="0,0,0,0"></Image>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="Black" FontSize="25" FontWeight="Bold">Settings</TextBlock>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Height="50" x:Name="admin" IsEnabled="False" Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal" Background="#00000000">
+                        <Image Source="icons/superuser.png" Width="48" Height="48" HorizontalAlignment="Left" Margin="0,0,0,0"></Image>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="Black" FontSize="25" FontWeight="Bold">Admin</TextBlock>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Height="50" x:Name="TempTab" Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal" Background="#00000000">
+                        <Image Name="TempTab_Image" Source="icons/search.png" Width="48"  Height="48" HorizontalAlignment="Left" Margin="0,0,0,0"></Image>
+                        <TextBlock Name="TempTab_Text" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="Black" FontSize="25" FontWeight="Bold">Users</TextBlock>
+                    </StackPanel>
+                </ListBoxItem>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Window>
+
+    

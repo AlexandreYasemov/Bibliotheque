@@ -1,0 +1,35 @@
+﻿<Page x:Class="Bibliotheque.forms.FilterForm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Bibliotheque.forms"
+      mc:Ignorable="d" 
+      Height="140" Width="450"
+      Title="LoginForm" KeyboardNavigation.TabNavigation="Cycle">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="White" Grid.RowSpan="10" Grid.ColumnSpan="10" RadiusX="20" RadiusY="20"/>
+        <TextBlock x:Name="tb_header" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Grid.ColumnSpan="2"><Run Language="fr-ch" Text="Filter"/></TextBlock>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,8" Orientation="Horizontal">
+            <ComboBox Name="cb_filters" Style="{StaticResource ComboboxStyle2}"></ComboBox>
+            <TextBox Name="tb_filter" TextWrapping="NoWrap" Width="330" HorizontalAlignment="Stretch" Height="Auto" Style="{StaticResource Textbox1}" VerticalContentAlignment="Center">
+            </TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Margin="8,0,8,8" HorizontalAlignment="Right" Grid.ColumnSpan="2" Width="Auto" FlowDirection="RightToLeft">
+            <Button Name="cancel" Margin="4,4,4,4" Style="{StaticResource ButtonNo}" Content="Cancel" FontWeight="Bold" HorizontalAlignment="Right" Width="100" Click="cancel_Click">
+            </Button>
+            <Button Click="AddFilter_Click" Margin="4,4,4,4" Style="{StaticResource ButtonYes}" Content="Add" FontWeight="Bold" HorizontalAlignment="Right" Width="100" BorderBrush="LightBlue" Background="LightBlue">
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>
