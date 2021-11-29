@@ -8,8 +8,8 @@ Changes from the original:
 
 It comes with a default admin user with no password required.
 
-![Screenshot](images/Capture1.png)
-![Screenshot](images/Capture2.png)
-![Screenshot](images/Capture3.png)
-![Screenshot](images/Capture4.png)
+![Screenshot](images/Capture1.PNG)
+![Screenshot](images/Capture2.PNG)
+![Screenshot](images/Capture3.PNG)
+![Screenshot](images/Capture4.PNG)
 
