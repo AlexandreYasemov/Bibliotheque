@@ -14,3 +14,8 @@ It comes with a default admin user with no password required.
 ![Screenshot](images/Capture2.PNG)
 ![Screenshot](images/Capture3.PNG)
 
+# Requirements
+.NET 5 Framework
+
+SQLite extention
+
