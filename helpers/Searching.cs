@@ -150,11 +150,11 @@ namespace Bibliotheque.helpers
                                 var extraProperties = value.GetType().GetProperties();
                                 foreach (var property in extraProperties)
                                 {
-                                    value = property.GetValue(value);
+                                    //Find a match
                                     switch (x.GetType().Name)
                                     {
                                         case "Book":
-                                            if ((p.PropertyType != typeof(string) || p.PropertyType.Name == "Language") && (p.Name != filter && filter != null)) { return false; }
+                                            if ((p.PropertyType != typeof(string) || p.Name == "Language") && (p.Name != filter && filter != null)) { return false; }
                                             return value != null && InvarientCultureCompare(value.ToString(), searchTerm) || CompareAgainstRelatedTables((Book)x, searchTerm);
                                         case "Borrow":
                                             return value != null && InvarientCultureCompare(value.ToString(), searchTerm) || CompareAgainstRelatedTables((Borrow)x, searchTerm);
@@ -164,10 +164,11 @@ namespace Bibliotheque.helpers
                                             return value != null && InvarientCultureCompare(value.ToString(), searchTerm);
                                     }
                                 }
+                                //Compare all properties against the entry's related properties
                                 switch (x.GetType().Name)
                                 {
                                     case "Book":
-                                        if ((p.PropertyType != typeof(string) || p.PropertyType.Name == "Language") && (p.Name != filter && filter != null)) { return false; }
+                                        if ((p.PropertyType == typeof(string) || p.Name == "Language") && (p.Name != filter && filter != null)) { return false; }
                                         return value != null && InvarientCultureCompare(value.ToString(), searchTerm) || CompareAgainstRelatedTables((Book)x, searchTerm);
                                     case "Borrow":
                                         return value != null && InvarientCultureCompare(value.ToString(), searchTerm) || CompareAgainstRelatedTables((Borrow)x, searchTerm);
@@ -189,7 +190,7 @@ namespace Bibliotheque.helpers
         {
             if (book.Author != null) { if (InvarientCultureCompare(book.Author.Name, term)) return true; }
             if (book.Publisher != null) { if (InvarientCultureCompare(book.Publisher.Name, term)) return true; }
-            if (book.Author != null) { if (InvarientCultureCompare(book.Type.Name, term)) return true; }
+            if (book.Type != null) { if (InvarientCultureCompare(book.Type.Name, term)) return true; }
 
             return false;
         }
